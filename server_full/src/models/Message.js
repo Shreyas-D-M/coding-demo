@@ -1,12 +1,12 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
+
 const MessageSchema = new mongoose.Schema({
-  debate: { type: mongoose.Schema.Types.ObjectId, ref: 'Debate', index: true, required: true },
-  senderUser: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-  senderType: { type: String, enum: ['user','ai','system'], required: true },
+  debate: { type: mongoose.Schema.Types.ObjectId, ref: "Debate", required: true },
+  senderType: { type: String, enum: ["user", "ai1", "ai2"], required: true },
+  senderUser: { type: mongoose.Schema.Types.ObjectId, ref: "User", default: null },
   text: { type: String, required: true },
-  roundNumber: Number,
+  roundNumber: { type: Number, default: null },
   createdAt: { type: Date, default: Date.now }
 });
-MessageSchema.index({ debate: 1, createdAt: -1 });
-MessageSchema.index({ text: 'text' });
-module.exports = mongoose.model('Message', MessageSchema);
+
+module.exports = mongoose.model("Message", MessageSchema);

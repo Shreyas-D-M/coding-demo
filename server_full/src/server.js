@@ -29,3 +29,10 @@ socketHandler(io);
 
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
+// near other route imports
+const scoreRoutes = require('./routes/scoreRoutes');
+io._app = app;
+app.set('io', io);
+
+// after existing app.use lines:
+app.use('/api', scoreRoutes); // mounts /api/debates/:id/score
